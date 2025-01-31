@@ -1,50 +1,31 @@
 import sympy as sp
 
+# Define the symbols for the vectors
+a1, a2, a3, b1, b2, b3 = sp.symbols('a1 a2 a3 b1 b2 b3')
 
-def projection(vector_a, vector_b):
-    """
-    Calculates the projection of vector_a onto vector_b.
+# Define the vectors
+a1, a2, a3 = input("Enter symbols for vector a (comma-separated): ").split(",")
+b1, b2, b3 = input("Enter symbols for vector b (comma-separated): ").split(",")
+a = sp.Matrix([a1, a2, a3])
+b = sp.Matrix([b1, b2, b3])
 
-    Parameters:
-    vector_a (sympy.Matrix): The vector to be projected.
-    vector_b (sympy.Matrix): The vector onto which vector_a is projected.
+# Calculate the dot product
+dot_product = a.dot(b)
 
-    Returns:
-    sympy.Matrix: The projection of vector_a onto vector_b.
-    """
-    return (vector_a.dot(vector_b) / vector_b.dot(vector_b)) * vector_b
+# Calculate the magnitude squared of vector b
+magnitude_b_squared = b.dot(b)
 
+# Calculate the projection of a onto b
+projection = (dot_product / magnitude_b_squared) * b
 
-def simplify_variable(equation=None, variable_to_solve=None, vector_a=None, vector_b=None):
-    """
-    Simplifies the given equation to express the specified variable in terms of the others.
-    If no equation is provided, it defaults to the projection formula.
+# Print the signed magnitude of the projection
+print(f"The projection of vector a onto vector b is: {projection}")
 
-    Parameters:
-    equation (sympy.Eq): The equation to be solved.
-    variable_to_solve (sympy.Symbol): The variable to isolate.
-    vector_a (sympy.Matrix): The vector to be projected.
-    vector_b (sympy.Matrix): The vector onto which vector_a is projected.
+# Calculate the magnitude of vector b
+magnitude_b = sp.sqrt(magnitude_b_squared)
 
-    Returns:
-    sympy.Expr: The expression of the variable in terms of others.
-    """
-    if equation is None:
-        # Default to the projection equation
-        # Define symbols for the vectors
-        a, b = input("Enter vector symbols (a,b): ").split(",")
-        vector_a, vector_b = sp.symbols(f'{a} {b}')
-        equation = projection(vector_a, vector_b)
- 
-    return sp.solve(equation, variable_to_solve)
+# Calculate c as the signed magnitude of the projection
+c = dot_product / magnitude_b
 
-
-def main():
-    equation = input("Enter the equation (default: projection): ")
-    variable_to_solve = sp.Symbol(input("Enter the variable to solve for: "))
-    solution = simplify_variable(equation, variable_to_solve)
-    print(f"The solution is: {solution}")
-
-
-if __name__ == "__main__":
-    main()
+# Print the value of c
+print(f"The signed magnitude of the projection of vector a onto vector b (c) is: {c}")
