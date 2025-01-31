@@ -1,14 +1,27 @@
 import sympy as sp
 
+print("We will calculate the projection of vector a onto vector b.")
+
+
+def negative_checked_matrix(vector):
+    vector_features = []
+    for feature in vector:
+        if feature.startswith('-'):
+            # If the user specifies a negative component
+            neg_component = feature[1:]  # Remove the '-' sign
+            vector_features.append(-sp.symbols(neg_component))
+        else:
+            vector_features.append(sp.symbols(feature))
+    return sp.Matrix(vector_features)
+
+
 # Define the symbols for the vectors
-a1, a2, a3, b1, b2, b3 = sp.symbols('a1 a2 a3 b1 b2 b3')
+a_vector = input("Enter symbols for vector a (comma-separated like a1,a2,a3): ").split(",")
+b_vector = input("Enter symbols for vector b (comma-separated like b1,b2,b3): ").split(",")
+a = negative_checked_matrix(a_vector) if len(a_vector) == 3 else sp.Matrix(sp.symbols('a1 a2 a3'))
+b = negative_checked_matrix(b_vector) if len(b_vector) == 3 else sp.Matrix(sp.symbols('b1 b2 b3'))
 
-# Define the vectors
-a1, a2, a3 = input("Enter symbols for vector a (comma-separated): ").split(",")
-b1, b2, b3 = input("Enter symbols for vector b (comma-separated): ").split(",")
-a = sp.Matrix([a1, a2, a3])
-b = sp.Matrix([b1, b2, b3])
-
+print("Calculating...")
 # Calculate the dot product
 dot_product = a.dot(b)
 
