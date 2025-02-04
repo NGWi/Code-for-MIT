@@ -4,6 +4,8 @@ print("We will calculate the projection of vector a onto vector b.")
 
 
 def negative_checked_matrix(vector):
+    """ Helper function to allow the module to understand negative inputs,
+    but not part of the math behind this module. """
     vector_features = []
     for feature in vector:
         if feature.startswith('-'):
@@ -22,6 +24,9 @@ a = negative_checked_matrix(a_vector) if len(a_vector) == 3 else sp.Matrix(sp.sy
 b = negative_checked_matrix(b_vector) if len(b_vector) == 3 else sp.Matrix(sp.symbols('b1 b2 b3'))
 
 print("Calculating...")
+
+
+# MATH:
 # Calculate the dot product
 dot_product = a.dot(b)
 
@@ -39,6 +44,8 @@ magnitude_b = sp.sqrt(magnitude_b_squared)
 
 # Calculate c as the signed magnitude of the projection
 c = dot_product / magnitude_b
+# END OF MATH
+
 
 # Print the value of c
 print(f"The signed magnitude of the projection of vector a onto vector b (c) is: {c}")
