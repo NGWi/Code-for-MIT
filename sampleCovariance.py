@@ -38,6 +38,53 @@ def calculate_beta_hat_1(covariance, variance_x):
     return covariance / variance_x
 
 
+def calculate_beta_hat_0(mean_x, mean_y, beta_hat_1):
+    """
+    Calculates the intercept beta_hat_0.
+
+    Args:
+        mean_x: The mean of the X values.
+        mean_y: The mean of the Y values.
+        beta_hat_1: The slope of the linear regression model.
+
+    Returns:
+        The intercept beta_hat_0.
+    """
+    beta_hat_0 = mean_y - beta_hat_1 * mean_x
+    return beta_hat_0
+
+
+def direct_r_squared(data_x, data_y, beta_hat_1, beta_hat_0):
+    """
+    Tests the goodness of fit of a linear regression model.
+
+    Returns:
+        The R-squared value.
+    """
+    # Predicted values
+    predicted_y = [beta_hat_0 + beta_hat_1 * x for x in data_x]
+    
+    # Calculate the mean of observed values
+    mean_y = sample_mean(data_y)
+    
+    # Calculate SST
+    sst = sum((y - mean_y) ** 2 for y in data_y)
+    
+    # Calculate SSR
+    ssr = sum((data_y[i] - predicted_y[i]) ** 2 for i in range(len(data_y)))
+    
+    # Calculate R^2
+    r_squared = 1 - (ssr / sst)
+    return r_squared
+
+
+    """
+    def count_significant_digits(number):
+        """Returns the number of significant digits in a number"""
+        return len(str(number).rstrip('0').replace('.', ''))
+    """
+
+
 def main(test_data=None):
     # Input data points
     if test_data:
@@ -62,6 +109,18 @@ def main(test_data=None):
     unit_product_string = unit1 + " * " + unit2
     correlation = covariance / (max_cov if covariance > 0 else min_cov)
     beta_hat_1 = calculate_beta_hat_1(covariance, std_dev1 ** 2)
+    beta_hat_0 = calculate_beta_hat_0(mean1, mean2, beta_hat_1)
+    correlation_squared = correlation ** 2
+    r_squared = direct_r_squared(data1, data2, beta_hat_1, beta_hat_0)
+    """
+    if r_squared is not None and correlation_squared is not None:
+        sd_r = count_significant_digits(r_squared)
+        sd_corr = count_significant_digits(correlation_squared)
+        if sd_r > sd_corr:
+            r_squared = round(r_squared, sd_corr)
+        elif sd_corr > sd_r:
+            correlation_squared = round(correlation_squared, sd_r)
+    """
 
     print(f'Sample Mean of Data1: {mean1} [{unit1}]')
     print(f'Sample Standard Deviation of Data1: {std_dev1} [{unit1}]')
@@ -72,7 +131,14 @@ def main(test_data=None):
     print(f'Minimum Covariance when perfectly anti-correlated: {min_cov} [{unit_product_string}]')
     print(f'Correlation Coefficient: {correlation}')
     print(f'Beta Hat 1: {beta_hat_1} [{unit2}/{unit1}]')
-
+    print(f'Beta Hat 0: {beta_hat_0} [{unit2}]')
+    """
+    if r_squared and r_squared == correlation_squared:
+        print(f"The direct method is equivalent to correlation squared: {r_squared}")
+    else:
+        print(f"The direct method is not equivalent to correlation squared: {r_squared} vs. {correlation_squared}")
+    """
+    
 # Test case:
 import numpy as np
 # Test data
