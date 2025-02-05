@@ -138,25 +138,27 @@ def main(test_data=None):
         print(f"The direct method is not equivalent to correlation squared: {r_squared} vs. {correlation_squared}")
     """
 
-# Test case 1:
-import numpy as np
-# Test data
-test_data_Xs = np.array([0.0339, 0.0423, 0.213, 0.257, 0.273, 0.273, 0.450, 0.503, 0.503, \
-0.637, 0.805, 0.904, 0.904, 0.910, 0.910, 1.02, 1.11, 1.11, 1.41, \
-1.72, 2.03, 2.02, 2.02, 2.02])
-units_X = "Mpc"
+# # Test case 1:
+# import numpy as np
+# # Test data
+# test_data_Xs = np.array([0.0339, 0.0423, 0.213, 0.257, 0.273, 0.273, 0.450, 0.503, 0.503, \
+# 0.637, 0.805, 0.904, 0.904, 0.910, 0.910, 1.02, 1.11, 1.11, 1.41, \
+# 1.72, 2.03, 2.02, 2.02, 2.02])
+# units_X = "Mpc"
 
-test_data_Ys = np.array([-19.3, 30.4, 38.7, 5.52, -33.1, -77.3, 398.0, 406.0, 436.0, 320.0, 373.0, \
-93.9, 210.0, 423.0, 594.0, 829.0, 718.0, 561.0, 608.0, 1.04E3, 1.10E3, \
-840.0, 801.0, 519.0])
-units_Y = "km/s"
+# test_data_Ys = np.array([-19.3, 30.4, 38.7, 5.52, -33.1, -77.3, 398.0, 406.0, 436.0, 320.0, 373.0, \
+# 93.9, 210.0, 423.0, 594.0, 829.0, 718.0, 561.0, 608.0, 1.04E3, 1.10E3, \
+# 840.0, 801.0, 519.0])
+# units_Y = "km/s"
 
-# Test case 2:
-Xs_2 = np.array([ 0.387, 0.723, 1.00, 1.52, 5.20, 9.54, 19.2, 30.1, 39.5 ])
+# # Test case 2:
+# Xs_2 = np.array([ 0.387, 0.723, 1.00, 1.52, 5.20, 9.54, 19.2, 30.1, 39.5 ])
+# units_X_2 = "AU"
+# Ys_2 = np.array([ 0.241, 0.615, 1.00, 1.88, 11.9, 29.5, 84.0, 165.0, 248 ])
+# units_Y_2 = "Years"
 
-Ys_2 = np.array([ 0.241, 0.615, 1.00, 1.88, 11.9, 29.5, 84.0, 165.0, 248 ])
 
 if __name__ == '__main__':
-    main((test_data_Xs, units_X, test_data_Ys, units_Y))
-    main((Xs_2, "AU", Ys_2, "Years"))
-
+    # main((test_data_Xs, units_X, test_data_Ys, units_Y))
+    # main((Xs_2, units_X_2, Ys_2, units_Y_2))
+    main()
