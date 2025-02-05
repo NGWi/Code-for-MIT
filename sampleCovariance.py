@@ -45,6 +45,7 @@ def main(test_data=None):
     max_cov = max_covariance(std_dev1, std_dev2)
     min_cov = min_covariance(std_dev1, std_dev2)
     unit_product_string = unit1 + " * " + unit2
+    correlation = covariance / (max_cov if covariance > 0 else min_cov)
 
     print(f'Sample Mean of Data1: {mean1} [{unit1}]')
     print(f'Sample Standard Deviation of Data1: {std_dev1} [{unit1}]')
@@ -53,6 +54,7 @@ def main(test_data=None):
     print(f'Sample Covariance: {covariance} [{unit_product_string}]')
     print(f'Maximum Covariance when perfectly correlated: {max_cov} [{unit_product_string}]')
     print(f'Minimum Covariance when perfectly anti-correlated: {min_cov} [{unit_product_string}]')
+    print(f'Correlation Coefficient: {correlation}')
 
 # Test case:
 import numpy as np
