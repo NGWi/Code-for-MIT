@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def sample_mean(data):
     return sum(data) / len(data)
 
@@ -23,6 +26,18 @@ def min_covariance(std_dev1, std_dev2):
     return -std_dev1 * std_dev2
 
 
+def calculate_beta_hat_1(covariance, variance_x):
+    """
+    Calculates the slope of a linear regression model.
+
+    Returns:
+        The slope of the linear regression model.
+    """
+    if variance_x == 0:
+        return 0
+    return covariance / variance_x
+
+
 def main(test_data=None):
     # Input data points
     if test_data:
@@ -46,6 +61,7 @@ def main(test_data=None):
     min_cov = min_covariance(std_dev1, std_dev2)
     unit_product_string = unit1 + " * " + unit2
     correlation = covariance / (max_cov if covariance > 0 else min_cov)
+    beta_hat_1 = calculate_beta_hat_1(covariance, std_dev1 ** 2)
 
     print(f'Sample Mean of Data1: {mean1} [{unit1}]')
     print(f'Sample Standard Deviation of Data1: {std_dev1} [{unit1}]')
@@ -55,6 +71,7 @@ def main(test_data=None):
     print(f'Maximum Covariance when perfectly correlated: {max_cov} [{unit_product_string}]')
     print(f'Minimum Covariance when perfectly anti-correlated: {min_cov} [{unit_product_string}]')
     print(f'Correlation Coefficient: {correlation}')
+    print(f'Beta Hat 1: {beta_hat_1} [{unit2}/{unit1}]')
 
 # Test case:
 import numpy as np
