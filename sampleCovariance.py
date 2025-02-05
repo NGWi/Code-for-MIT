@@ -77,10 +77,9 @@ def direct_r_squared(data_x, data_y, beta_hat_1, beta_hat_0):
     r_squared = 1 - (ssr / sst)
     return r_squared
 
-
     """
     def count_significant_digits(number):
-        """Returns the number of significant digits in a number"""
+        Returns the number of significant digits in a number
         return len(str(number).rstrip('0').replace('.', ''))
     """
 
@@ -138,8 +137,8 @@ def main(test_data=None):
     else:
         print(f"The direct method is not equivalent to correlation squared: {r_squared} vs. {correlation_squared}")
     """
-    
-# Test case:
+
+# Test case 1:
 import numpy as np
 # Test data
 test_data_Xs = np.array([0.0339, 0.0423, 0.213, 0.257, 0.273, 0.273, 0.450, 0.503, 0.503, \
@@ -152,7 +151,12 @@ test_data_Ys = np.array([-19.3, 30.4, 38.7, 5.52, -33.1, -77.3, 398.0, 406.0, 43
 840.0, 801.0, 519.0])
 units_Y = "km/s"
 
+# Test case 2:
+Xs_2 = np.array([ 0.387, 0.723, 1.00, 1.52, 5.20, 9.54, 19.2, 30.1, 39.5 ])
+
+Ys_2 = np.array([ 0.241, 0.615, 1.00, 1.88, 11.9, 29.5, 84.0, 165.0, 248 ])
 
 if __name__ == '__main__':
     main((test_data_Xs, units_X, test_data_Ys, units_Y))
+    main((Xs_2, "AU", Ys_2, "Years"))
 
