@@ -1,3 +1,7 @@
+"""
+WARNING: Work in progress. Missed the local minimum at critical point x_1. 
+"""
+
 import numpy as np
 from scipy.optimize import fsolve
 
