@@ -1,4 +1,5 @@
 import numpy as np
+import statsmodels.api as sm
 
 # Given data
 LogPlanetMass = np.array([-0.31471074,  1.01160091,  0.58778666,  0.46373402, -0.01005034,
@@ -75,3 +76,26 @@ print("LogPlanetOrbit (beta_2):", beta_2)
 print("StarMetallicity (beta_3):", beta_3)
 print("LogStarMass (beta_4):", beta_4)
 print("LogStarAge (beta_5):", beta_5)
+
+def calculate_t_statistics(X, y):
+    # Add a constant to the model (intercept)
+    X = sm.add_constant(X)
+    
+    # Fit the model
+    model = sm.OLS(y, X).fit()
+    
+    # Get the coefficients and standard errors
+    coefficients = model.params
+    standard_errors = model.bse
+    
+    # Calculate T statistics
+    t_statistics = coefficients / standard_errors
+    
+    return t_statistics, model.summary()
+
+
+t_statistics, summary = calculate_t_statistics(X, y)
+print("T Statistics:")
+print(t_statistics)
+print("\nSummary:")
+print(summary)
